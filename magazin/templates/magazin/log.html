@@ -1,0 +1,82 @@
+{% extends "magazin/baza.html" %}
+
+{% block titlu %}Log accesări{% endblock %}
+
+{% block continut %}
+
+<h1>Log accesări</h1>
+
+{% if mesaje %}
+    {% for mesaj in mesaje %}
+        <p><b>{{ mesaj }}</b></p>
+    {% endfor %}
+{% endif %}
+
+{% if tabel %}
+    <table border="1" cellpadding="5">
+        <tr>
+            {% for col in coloane_tabel %}
+                <th>{{ col|upper }}</th>
+            {% endfor %}
+        </tr>
+
+        {% for acc in accesari %}
+        <tr>
+            {% for col in coloane_tabel %}
+                {% if col == "id" %}
+                    <td>{{ acc.id }}</td>
+                {% elif col == "url" %}
+                    <td>{{ acc.url }}</td>
+                {% elif col == "data" %}
+                    <td>{{ acc.data }}</td>
+                {% endif %}
+            {% endfor %}
+        </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    <ul>
+        {% for acc in accesari %}
+            <li>
+                ID: {{ acc.id }},
+                URL: {{ acc.url }},
+                Data: {{ acc.data }}
+            </li>
+        {% endfor %}
+    </ul>
+{% endif %}
+
+
+
+{% if pagina_max %}
+    <p><b>Cea mai accesată pagină:</b> {{ pagina_max }}</p>
+    <p><b>Cea mai puțin accesată pagină:</b> {{ pagina_min }}</p>
+{% endif %}
+
+<hr>
+
+<h2>Log SQL</h2>
+
+{% if sql_activ %}
+    <p>
+        <strong>Număr comenzi SQL (accesare curentă):</strong>
+        {{ nr_sql_curent }}
+    </p>
+
+    <ul>
+        {% for q in sql_queries %}
+            <li>{{ q.sql }}</li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>
+        Pentru afișare SQL adăugați <code>?sql=true</code> în URL.
+    </p>
+{% endif %}
+
+<p>
+    <strong>Total comenzi SQL (toate accesările):</strong>
+    {{ total_sql }}
+</p>
+
+{% endblock %}

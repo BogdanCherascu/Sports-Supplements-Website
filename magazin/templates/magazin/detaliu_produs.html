@@ -1,0 +1,23 @@
+{% extends "magazin/baza.html" %}
+
+{% block titlu %}{{ produs.nume }}{% endblock %}
+
+{% block continut %}
+
+<h1>{{ produs.nume }}</h1>
+
+<p><strong>Preț:</strong> {{ produs.pret }} lei</p>
+<p><strong>Stoc:</strong> {{ produs.stoc }}</p>
+<p><strong>Categorie:</strong> {{ produs.categorie.nume }}</p>
+<p><strong>Producător:</strong> {{ produs.producator.nume }}</p>
+
+<h3>Ingrediente</h3>
+<ul>
+    {% for ingredient in produs.ingrediente.all %}
+        <li>{{ ingredient.nume }}</li>
+    {% empty %}
+        <li>Nu are ingrediente asociate.</li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

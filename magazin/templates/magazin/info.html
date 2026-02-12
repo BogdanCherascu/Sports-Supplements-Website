@@ -1,0 +1,27 @@
+{% extends "magazin/baza.html" %}
+
+{% block titlu %}Informații{% endblock %}
+
+{% block continut %}
+
+<h1>Informații</h1>
+
+{% if mesaj %}
+    <p>{{ mesaj }}</p>
+{% endif %}
+<h3>Parametri</h3>
+
+<p>Număr parametri: {{ nr_parametri }}</p>
+
+{% if parametri %}
+    <ul>
+        {% for p in parametri %}
+            <li>{{ p }}</li>
+        {% endfor %}
+    </ul>
+{% else %}
+    <p>Nu au fost primiți parametri.</p>
+{% endif %}
+
+
+{% endblock %}

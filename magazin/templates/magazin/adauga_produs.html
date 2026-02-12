@@ -1,0 +1,7 @@
+<h2>Adăugare produs</h2>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Salvează produs</button>
+</form>

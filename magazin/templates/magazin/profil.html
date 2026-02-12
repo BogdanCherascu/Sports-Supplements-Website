@@ -1,0 +1,18 @@
+{% extends "magazin/baza.html" %}
+
+{% block titlu %}Profil utilizator{% endblock %}
+
+{% block continut %}
+    <h1>Profil utilizator</h1>
+
+    <p><strong>Username:</strong> {{ request.user.username }}</p>
+    <p><strong>Email:</strong> {{ request.user.email }}</p>
+
+    <p>
+        <a href="{% url 'produse' %}">← Înapoi la produse</a>
+    </p>
+
+    <p>
+        <a href="{% url 'logout' %}">Logout</a>
+    </p>
+{% endblock %}

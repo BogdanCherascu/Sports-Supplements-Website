@@ -1,0 +1,106 @@
+{% extends "magazin/baza.html" %}
+
+{% block continut %}
+
+<h1 style="color: {{ categorie.culoare }};">
+    <i class="fa {{ categorie.icon }}"></i>
+    {{ categorie.nume }}
+</h1>
+
+<p>{{ categorie.descriere }}</p>
+
+<hr>
+
+
+<form method="get" class="filtru-form">
+    <fieldset>
+        <legend>Filtrare produse din {{ categorie.nume }}</legend>
+
+        {{ form.non_field_errors }}
+
+        <p>
+            {{ form.nume.label_tag }}
+            {{ form.nume }}
+            {{ form.nume.errors }}
+        </p>
+
+        <p>
+            {{ form.pret_min.label_tag }}
+            {{ form.pret_min }}
+            {{ form.pret_min.errors }}
+        </p>
+
+        <p>
+            {{ form.pret_max.label_tag }}
+            {{ form.pret_max }}
+            {{ form.pret_max.errors }}
+        </p>
+
+        <p>
+            {{ form.activ }}
+            {{ form.activ.label_tag }}
+        </p>
+
+        <p>
+            {{ form.per_page.label_tag }}
+            {{ form.per_page }}
+            {{ form.per_page.errors }}
+        </p>
+
+        {{ form.categorie.as_hidden }}
+
+        <button type="submit">Filtrează</button>
+        <a href="{% url 'categorie' categorie.nume %}"
+        onclick="return confirm('Resetarea va șterge toate filtrele aplicate. Continui?');">
+        Reset filtre
+        </a>
+    </fieldset>
+</form>
+
+<hr>
+
+{% for produs in page_obj %}
+    <div class="produs">
+        <h3>
+            <a href="{% url 'detaliu_produs' produs.id %}">
+                {{ produs.nume }}
+            </a>
+        </h3>
+
+        <p><strong>Preț:</strong> {{ produs.pret }} lei</p>
+
+        <p>
+            <strong>Status:</strong>
+            {% if produs.activ %}
+                activ
+            {% else %}
+                inactiv
+            {% endif %}
+        </p>
+    </div>
+
+    <hr>
+{% empty %}
+    <p><strong>Nu există produse în această categorie pentru filtrele selectate.</strong></p>
+{% endfor %}
+
+
+<div class="pagination">
+    {% if page_obj.has_previous %}
+        <a href="?{% if request.GET %}{{ request.GET.urlencode }}&{% endif %}page={{ page_obj.previous_page_number }}">
+            &laquo; Anterior
+        </a>
+    {% endif %}
+
+    <span>
+        Pagina {{ page_obj.number }} din {{ page_obj.paginator.num_pages }}
+    </span>
+
+    {% if page_obj.has_next %}
+        <a href="?{% if request.GET %}{{ request.GET.urlencode }}&{% endif %}page={{ page_obj.next_page_number }}">
+            Următor &raquo;
+        </a>
+    {% endif %}
+</div>
+
+{% endblock %}

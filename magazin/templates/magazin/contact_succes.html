@@ -1,0 +1,12 @@
+{% extends "magazin/baza.html" %}
+
+{% block content %}
+    <h2>Mesaj trimis cu succes </h2>
+
+    <p>
+        Mulțumim pentru mesaj!  
+        Vom reveni cu un răspuns în cel mai scurt timp.
+    </p>
+
+    <a href="{% url 'contact' %}">Trimite un alt mesaj</a>
+{% endblock %}

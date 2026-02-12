@@ -1,0 +1,42 @@
+
+{% extends "magazin/baza.html" %}
+{% load static %}
+{% block titlu %}Despre noi{% endblock %}
+
+{% block continut %}
+
+<div class="sectiune" id="cine-suntem">
+    <h2>Cine suntem</h2>
+
+    <p>
+        Suntem o echipă pasionată de sport și nutriție, iar acest proiect
+        reprezintă un magazin online dedicat suplimentelor sportive de calitate.
+    </p>
+
+    <p>
+        Ne adresăm atât sportivilor de performanță, cât și persoanelor
+        care își doresc un stil de viață sănătos și activ.
+    </p>
+</div>
+
+<div class="sectiune" style="text-align: center;">
+    <img src="{% static 'magazin/imagini/sven-mieke-jO6vBWX9h9Y-unsplash.jpg' %}" alt="Suplimente sportive" class="poza" style="width: 1100px; height: auto;">
+</div>
+
+
+<div class="sectiune" id="misiune">
+    <h2>Misiunea noastră</h2>
+
+    <p>
+        Misiunea noastră este să oferim suplimente sportive sigure și eficiente,
+        alături de informații corecte și ușor de înțeles pentru fiecare utilizator.
+    </p>
+
+    <p>
+        Ne dorim să construim o platformă modernă, intuitivă și utilă,
+        care să ajute utilizatorii să facă alegeri informate.
+    </p>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,65 @@
+
+{% extends "magazin/baza.html" %}
+{% load static %}
+
+
+{% block titlu %}Acasă{% endblock %}
+
+{% block continut %}
+
+<div class="sectiune">
+    <h2>Bine ai venit la Magazinul de Suplimente Sportive</h2>
+
+    <p>
+        Acest proiect reprezintă un magazin online inspirat de stilul GymBeam,
+        dedicat sportivilor și persoanelor active care doresc suplimente de
+        calitate: proteine, creatină, vitamine, pre-workout și multe altele.
+    </p>
+
+    <p>
+        Platforma permite explorarea produselor, informarea corectă și,
+        ulterior, achiziția rapidă a suplimentelor potrivite fiecărui obiectiv
+        sportiv.
+    </p>
+</div>
+
+<div class="sectiune" style="text-align: center;">
+    <img src="{% static 'magazin/imagini/danielle-cerullo-CQfNt66ttZM-unsplash.jpg' %}" alt="Suplimente sportive" class="poza" style="width: 1100px; height: auto;">
+</div>
+
+
+<div class="sectiune">
+    <h2>Categorii de suplimente</h2>
+
+    <p>
+        Magazinul nostru oferă o gamă variată de suplimente sportive,
+        structurate pe categorii pentru a facilita alegerea produselor potrivite.
+    </p>
+
+    <ul>
+        <li>Proteine pentru creștere musculară</li>
+        <li>Creatină pentru forță și performanță</li>
+        <li>Vitamine și minerale</li>
+        <li>Pre-workout și energie</li>
+        <li>Suplimente pentru recuperare</li>
+    </ul>
+</div>
+
+<div class="sectiune">
+    <h2>De ce să alegi magazinul nostru?</h2>
+
+    <p>
+        Ne diferențiem prin atenția acordată calității produselor,
+        informațiilor corecte și experienței utilizatorului.
+    </p>
+
+    <ul>
+        <li>Produse de la branduri cunoscute</li>
+        <li>Informații clare și detaliate</li>
+        <li>Design modern și ușor de utilizat</li>
+        <li>Structură clară a categoriilor</li>
+    </ul>
+</div>
+
+
+{% endblock %}

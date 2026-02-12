@@ -1,0 +1,11 @@
+{% extends "magazin/baza.html" %}
+
+{% block continut %}
+<h1>Contact</h1>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Trimite</button>
+</form>
+{% endblock %}
