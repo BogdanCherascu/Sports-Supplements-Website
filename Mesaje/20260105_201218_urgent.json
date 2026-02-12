@@ -1,0 +1,12 @@
+{
+    "nume": "Popescu",
+    "prenume": "Ion",
+    "email": "ion.popescu@gmail.com",
+    "tip_mesaj": "review",
+    "subiect": "Feedback produs",
+    "mesaj": "Foarte bun produsul, recomand Popescu",
+    "zile_asteptare": 4,
+    "varsta": "20 ani și 5 luni",
+    "urgent": true,
+    "timestamp": "2026-01-05T20:12:18.159456"
+}
