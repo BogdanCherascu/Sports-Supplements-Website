@@ -1,55 +1,56 @@
-# Analiză Proiect: Suplimente Django
+# Django Supplements Website
 
-Acest proiect este o aplicație web de tip E-commerce (magazin online) dezvoltată în **Django**, dedicată vânzării de suplimente.
+This project is an E-commerce web application developed in **Django**, dedicated to the sale of supplements.
 
-## Structura Generală
+## General Structure
 
-- **Nume Proiect:** `suplimente_django`
-- **Aplicații:**
-    - `magazin`: Aplicația principală care conține logica magazinului.
-    - `Mesaje`: Un director utilizat pentru stocarea mesajelor primite prin formularul de contact (format JSON).
-    - `suplimente`: Directorul de configurare a proiectului.
+- **Project Name:** `suplimente_django`
+- **Applications:**
+    - `magazin`: The main application containing the store logic.
+    - `Mesaje`: A directory used for storing messages received via the contact form (in JSON format).
+    - `suplimente`: The project configuration directory.
 
-## Configurare Tehnică
-- **Bază de date:** Este configurat pentru a utiliza **PostgreSQL** (`proiectsuplimente`), deși există un fișier `db.sqlite3` în rădăcină (probabil nefolosit sau vechi).
-- **Dependency Management:** Fișiere standard Django (`manage.py`, `wsgi.py`, `asgi.py`).
+## Technical Configuration
+- **Database:** Configured to use **PostgreSQL** (`proiectsuplimente`).
+  *Note: A `db.sqlite3` file exists in the root directory but is likely unused or legacy.*
+- **Dependency Management:** Standard Django files (`manage.py`, `wsgi.py`, `asgi.py`).
 
-## Funcționalități Principale (Aplicația `magazin`)
+## Core Functionalities (`magazin` App)
 
-### 1. Modele de Date (`models.py`)
-Structura bazei de date este bine definită pentru un magazin:
-- **`Produs`**: Elementul central. Include preț, stoc, status (activ/inactiv), și relații către Categorie, Producător, Ingrediente și Oferte.
-- **`Categorie`**: Categoriile produselor, având proprietăți vizuale precum `culoare` (hex) și `icon` (FontAwesome).
-- **`Producator`**: Informații despre producători (țară, an înființare, cifră afaceri).
-- **`Ingredient`**: Lista de ingrediente posibile, clasificate după tip (activ, aromă, vitamină, altele).
-- **`Oferta`**: Gestionarea reducerilor procentuale pe perioade de timp.
-- **`ProfilUtilizator`**: Extensie a utilizatorului standard Django, adăugând telefon și adresă completă.
+### 1. Data Models (`models.py`)
+The database structure is well-defined for an e-commerce platform:
+- **`Produs` (Product)**: The central element. Includes price, stock, status (active/inactive), and relationships to Category, Manufacturer, Ingredients, and Offers.
+- **`Categorie` (Category)**: Product categories featuring visual properties such as `color` (hex) and `icon` (FontAwesome).
+- **`Producator` (Manufacturer)**: Manufacturer details (country, founding year, turnover).
+- **`Ingredient`**: A list of possible ingredients, classified by type (active, flavor, vitamin, other).
+- **`Oferta` (Offer)**: Manages percentage discounts over specific time periods.
+- **`ProfilUtilizator` (User Profile)**: An extension of the standard Django User, adding fields for phone number and full address.
 
-### 2. Fluxuri de Utilizator (`views.py` & `urls.py`)
-- **Navigare Publică:** Pagini pentru Acasă, Despre, Info.
-- **Catalog Produse:**
-    - Listare produse cu **filtrare avansată** (după nume, preț minim/maxim, categorie, status activ).
-    - Sortare (ascendentă/descendentă după preț).
-    - Paginare customizabilă.
-    - Pagini de detaliu produs și filtrare după categorie.
-- **Cont Utilizator:**
-    - Înregistrare (creează automat și profilul de utilizator).
-    - Autentificare (Login) și Delogare.
-    - Pagina de profil (accesibilă doar utilizatorilor autentificați).
-- **Coș Virtual:** Există rute pentru coș, dar momentan afișează o pagină "În lucru".
+### 2. User Flows (`views.py` & `urls.py`)
+- **Public Navigation:** Home, About, and Info pages.
+- **Product Catalog:**
+    - Product listing with **advanced filtering** (by name, min/max price, category, active status).
+    - Sorting (ascending/descending by price).
+    - Customizable pagination.
+    - Product detail pages and filtering by specific category.
+- **User Account:**
+    - Registration (automatically creates the associated User Profile).
+    - Login and Logout.
+    - Profile Page (accessible only to authenticated users).
+- **Virtual Cart:** Routes for the cart exist, but currently display a "Work in Progress" page.
 
-### 3. Funcționalități Speciale
-- **Formular de Contact Complex:**
-    - Validează vârsta utilizatorului.
-    - Procesează textul mesajului (corectează spațierea, formatează majusculele după punctuație).
-    - **Calcul Urgență:** Determină automat dacă un mesaj este urgent pe baza tipului de mesaj și a timpului de așteptare selectat.
-    - Salvează mesajele ca fișiere **JSON** în folderul `Mesaje`, cu timestamp.
-- **Sistem Custom de Logging:**
-    - Clasa `Accesare` reține în memorie (RAM) istoricul cererilor (IP, URL, data).
-    - Pagina `/log/` permite vizualizarea acestor loguri, filtrarea lor și chiar afișarea interogărilor SQL executate (pentru debugging).
+### 3. Special Features
+- **Complex Contact Form:**
+    - Validates user age.
+    - Processes message text (corrects spacing, capitalizes sentences based on punctuation).
+    - **Urgency Calculation:** Automatically determines if a message is urgent based on the message type and the user's selected waiting time.
+    - Saves messages as **JSON** files in the `Mesaje` folder, including timestamps.
+- **Custom Logging System:**
+    - The `Accesare` class retains request history (IP, URL, date) in memory (RAM).
+    - The `/log/` page allows viewing and filtering these logs, as well as displaying executed SQL queries (useful for debugging).
 - **Context Processors:**
-    - `categorii_meniu`: Face categoriile disponibile în toate template-urile (pentru meniu).
-    - `status_relatii_clienti`: Verifică un orar dintr-un fișier JSON (`program_relatii.json`) și afișează dacă serviciul de relații cu clienții este deschis sau închis în momentul accesării.
+    - `categorii_meniu`: Makes product categories available in all templates (for the navigation menu).
+    - `status_relatii_clienti`: Checks a schedule from a JSON file (`program_relatii.json`) to display whether Customer Service is currently "Open" or "Closed" based on the access time.
 
-### Concluzie
-Proiectul este un prototip funcțional avansat pentru un magazin online, având implementate structurile de date de bază și fluxurile principale, cu câteva elemente interesante de procesare a datelor (contact form) și monitorizare (logging). Zona de "Coș de cumpărături" și "Comandă" pare a fi încă în dezvoltare ("in_lucru").
+### Conclusion
+This project is an advanced functional prototype for an online store. It implements core data structures and main user flows, featuring interesting elements regarding data processing (contact form) and system monitoring (logging). The "Shopping Cart" and "Checkout" areas are currently under development.
